@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulir Data Teman</title>
+    <style>
+        body {
+            background-color: #ffd700;
+            font-family: Cambria, serif;
+            padding: 20px;
+        }
+
+        h2 {
+            text-align: center;
+            color: #2c3e50;
+        }
+
+        .form-kotak {
+            background-color: cornsilk;
+            padding: 25px;
+            border-radius: 12px;
+            max-width: 500px;
+            margin: 0 auto 25px auto;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            display: block;
+            margin-top: 12px;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 15px;
+            box-sizing: border-box;
+        }
+
+        button {
+            margin-top: 18px;
+            padding: 12px 25px;
+            background-color: #f5b800;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        button:hover {
+            background-color: #e6a800;
+        }
+
+        .daftar-teman {
+            background-color: cornsilk;
+            padding: 20px;
+            border-radius: 12px;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        th,
+        td {
+            padding: 10px;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f5b800;
+            color: #2c3e50;
+        }
+
+        tr:nth-child(even) {
+            background-color: #fff8dc;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h2>Formulir Data Anggota</h2>
+
+    <!-- === BAGIAN FORM ISIAN === -->
+    <div class="form-kotak">
+        <label>Nama Lengkap:</label>
+        <input type="text" id="nama" placeholder="Masukkan nama lengkap">
+
+        <label>Jenis Kelamin:</label>
+        <select id="jenisKelamin">
+            <option value="">-- Pilih --</option>
+            <option>Laki-laki</option>
+            <option>Perempuan</option>
+        </select>
+
+        <label>Umur:</label>
+        <input type="number" id="umur" placeholder="Contoh: 17">
+
+        <label>Alamat / Kota:</label>
+        <input type="text" id="alamat" placeholder="Contoh: Madiun, Jawa Timur">
+
+        <label>Hobi / Kesukaan:</label>
+        <textarea id="hobi" rows="3" placeholder="Contoh: Baca buku, main bola, ngoding..."></textarea>
+
+        <button onclick="simpanData()"> Simpan Data Anggota</button>
+    </div>
+
+    <!-- === BAGIAN DAFTAR YANG SUDAH DIISI === -->
+    <div class="daftar-teman">
+        <h3 style="text-align:center; color:#2c3e50;">Daftar Anggota</h3>
+        <table id="tabelTeman">
+            <tr>
+                <th>No</th>
+                <th>Nama Lengkap</th>
+                <th>Jenis Kelamin</th>
+                <th>Umur</th>
+                <th>Alamat</th>
+                <th>Hobi</th>
+            </tr>
+        </table>
+    </div>
+
+    <script>
+        let nomor = 1;
+
+        function simpanData() {
+            // Ambil nilai dari setiap kolom
+            let nama = document.getElementById('nama').value.trim();
+            let jk = document.getElementById('jenisKelamin').value;
+            let umur = document.getElementById('umur').value.trim();
+            let alamat = document.getElementById('alamat').value.trim();
+            let hobi = document.getElementById('hobi').value.trim();
+
+            // Cek jika ada yang kosong
+            if (!nama || !jk || !umur || !alamat || !hobi) {
+                alert('Harap isi SEMUA kolom!');
+                return;
+            }
+
+            // Masukkan ke tabel
+            let tabel = document.getElementById('tabelTeman');
+            let barisBaru = tabel.insertRow();
+            barisBaru.innerHTML = `
+        <td>${nomor}</td>
+        <td>${nama}</td>
+        <td>${jk}</td>
+        <td>${umur}</td>
+        <td>${alamat}</td>
+        <td>${hobi}</td>
+    `;
+
+            nomor++;
+
+            // Kosongkan form setelah disimpan
+            document.getElementById('nama').value = '';
+            document.getElementById('jenisKelamin').value = '';
+            document.getElementById('umur').value = '';
+            document.getElementById('alamat').value = '';
+            document.getElementById('hobi').value = '';
+
+            alert('Data berhasil disimpan!');
+        }
+    </script>
+
+</body>
+
+</html>
